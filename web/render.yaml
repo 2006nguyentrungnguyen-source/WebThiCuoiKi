@@ -4,6 +4,7 @@ services:
     runtime: node
     region: singapore
     plan: free
+    rootDir: web
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
