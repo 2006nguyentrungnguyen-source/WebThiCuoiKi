@@ -2,8 +2,6 @@
  * Product Detail Page
  * Hiển thị chi tiết sản phẩm với hình ảnh, giá, và nút mua hàng
  */
-
-"use client";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
