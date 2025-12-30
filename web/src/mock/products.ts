@@ -21,11 +21,6 @@ const CUSTOM_NAMES = [
   "Trà sữa khoai lang tím", "Trà sữa dừa", "Trà sữa hạnh nhân",
   "Trà sữa mè đen", "Trà sữa yến mạch", "Trà sữa sầu riêng",
   "Trà sữa phô mai tươi", "Trà sữa kem trứng",
-  // Thêm 10 sản phẩm mới cho đủ 60
-  "Trà sữa nướng", "Trà sữa hạt dẻ", "Trà sữa hạt sen", 
-  "Trà sữa bí đao", "Trà sữa sâm dứa", "Trà sữa khúc bạch",
-  "Trà sữa thạch củ năng", "Trà sữa nếp cẩm", "Trà sữa đậu biếc",
-  "Trà sữa ngũ cốc"
 ];
 
 export const PRODUCTS: Product[] = Array.from({ length: 60 }, (_, i) => {
