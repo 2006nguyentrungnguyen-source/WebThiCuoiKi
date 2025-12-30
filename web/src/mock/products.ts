@@ -58,7 +58,7 @@ const CUSTOM_NAMES = [
 
 ];
 
-export const PRODUCTS: Product[] = Array.from({ length: 50 }, (_, i) => {
+export const PRODUCTS: Product[] = Array.from({ length: 30 }, (_, i) => {
   const n = i + 1;
   const title = CUSTOM_NAMES[i] ?? `Sản phẩm #${n}`; 
   const slug = title
@@ -71,7 +71,7 @@ export const PRODUCTS: Product[] = Array.from({ length: 50 }, (_, i) => {
     title,
     slug,
     price: 30000 + (n % 2) * 10000,
-    images: [`/anh/${ i + 1 <=30 ? i + 1:"placeholder"}.jfif`],
+    images: [`/anh/${ i + 1 <=30 ? i + 1:"placeholder"}.jpg`],
     stock: n % 7 === 0 ? 0 : ((n * 3) % 21) + 1,
     rating: (n % 5) + 1,
     brand: BRANDS[n % BRANDS.length],
