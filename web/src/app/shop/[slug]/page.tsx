@@ -135,23 +135,6 @@ export default function ProductDetailPage({ params }: Props) {
           </div>
         </div>
       </main>
-
-      {/* Sửa style jsx để đảm bảo build không lỗi */}
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.4s ease-out;
-        }
-      `}</style>
     </>
   );
 }
