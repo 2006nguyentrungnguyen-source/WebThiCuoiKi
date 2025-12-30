@@ -1,31 +1,25 @@
-import type { Metadata } from "next";
+"use client"; // [QUAN TRỌNG] Thêm dòng này để hỗ trợ style-jsx và các tương tác client
+
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/lib/catalog";
 import { formatVND } from "@/lib/format";
 import AddToCartButton from "@/features/cart/AddToCartButton";
+import { use } from "react"; // Sử dụng để giải nén params trong Client Component
 
-// ===== META =====
-export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> }
-): Promise<Metadata> {
-  const { slug } = await params;
-  const product = getProductBySlug(slug);
-
-  return {
-    title: product
-      ? `${product.title} — Highland Coffee`
-      : "Sản phẩm — Highland Coffee",
-  };
+interface Props {
+  params: Promise<{ slug: string }>;
 }
 
-// ===== PAGE =====
-export default async function ProductDetailPage(
-  { params }: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await params;
+// Lưu ý: Metadata phải được xử lý riêng hoặc chuyển vào một file layout/page server
+// Vì đây là Client Component, chúng ta sẽ tập trung vào phần hiển thị.
+
+export default function ProductDetailPage({ params }: Props) {
+  // Giải nén params bằng React.use() vì params là một Promise
+  const { slug } = use(params);
   const product = getProductBySlug(slug);
+
   if (!product) return notFound();
 
   const image = product.images?.[0] ?? "/placeholder.png";
@@ -43,6 +37,7 @@ export default async function ProductDetailPage(
               alt={product.title}
               width={640}
               height={640}
+              priority // Ưu tiên load ảnh sản phẩm
               className="
                 w-full h-auto object-cover
                 transition-transform duration-500
@@ -76,13 +71,14 @@ export default async function ProductDetailPage(
             {/* ACTION */}
             <div className="mt-6 flex gap-4 flex-wrap items-center">
 
-              {/* ADD TO CART (BỌC NGOÀI ĐỂ STYLE) */}
+              {/* ADD TO CART */}
               <div
                 className="
                   h-11 rounded-full
                   border border-[#8B1E1E]
                   hover:bg-[#8B1E1E]/10
                   transition-colors
+                  flex items-center overflow-hidden
                 "
               >
                 <AddToCartButton
@@ -135,13 +131,12 @@ export default async function ProductDetailPage(
               >
                 ← Quay lại Shop
               </Link>
-
             </div>
           </div>
         </div>
       </main>
 
-      {/* ===== CSS GỘP TRONG FILE ===== */}
+      {/* Sửa style jsx để đảm bảo build không lỗi */}
       <style jsx global>{`
         @keyframes fadeIn {
           from {
@@ -153,7 +148,6 @@ export default async function ProductDetailPage(
             transform: translateY(0);
           }
         }
-
         .animate-fadeIn {
           animation: fadeIn 0.4s ease-out;
         }

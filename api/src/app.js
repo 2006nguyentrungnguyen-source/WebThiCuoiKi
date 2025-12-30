@@ -18,18 +18,19 @@ app.use(
   })
 );
 
-// CORS theo ENV
-const allowOrigin = process.env.CORS_ORIGIN || "http://localhost:3000";
+// CORS theo ENV - Cho phép cả local và domain trên Render
+const allowOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173", // Nếu dùng Vite
+  process.env.CORS_ORIGIN // Link web từ Render
+].filter(Boolean); // Loại bỏ các giá trị undefined
+
 app.use(
   cors({
-    origin: allowOrigin,
+    origin: allowOrigins,
     credentials: true,
   })
 );
-
-// Body parser & logger
-app.use(express.json({ limit: "10kb" }));
-app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 
 // ===== API prefix v1 =====
 const api = express.Router();
