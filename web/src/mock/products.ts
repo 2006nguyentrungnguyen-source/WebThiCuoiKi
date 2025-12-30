@@ -23,7 +23,7 @@ const CUSTOM_NAMES = [
   "Trà sữa phô mai tươi", "Trà sữa kem trứng",
 ];
 
-export const PRODUCTS: Product[] = Array.from({ length: 60 }, (_, i) => {
+export const PRODUCTS: Product[] = Array.from({ length: 50 }, (_, i) => {
   const n = i + 1;
   const title = CUSTOM_NAMES[i] ?? `Sản phẩm #${n}`; 
   
